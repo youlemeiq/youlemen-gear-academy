@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ci:
+    name: Run checks and tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Wordle Check and test
+        run: |
+          cd wordle
+          cargo fmt --all --check
+          cargo clippy --all-targets -- -D warnings -A unused-imports
+          cargo b
+          cargo t
+
+      - name: Session Check and test
+        run: |
+          cd session
+          cargo fmt --all --check
+          cargo clippy --all-targets -- -D warnings -A unused-imports
+          cargo b
+          cargo t
