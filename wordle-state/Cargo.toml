@@ -1,0 +1,13 @@
+[package]
+name = "wordle-game-state"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gstd = { git = "https://github.com/gear-tech/gear.git", tag = "v1.7.1" }
+gmeta = { git = "https://github.com/gear-tech/gear.git", tag = "v1.7.1", features = ["codegen"] }
+session-game-io.path = "../io"
+
+[build-dependencies]
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", tag = "v1.7.1", features = ["metawasm"] }
+session-game-io.path = "../io"
