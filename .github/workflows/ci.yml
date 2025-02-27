@@ -25,6 +25,7 @@ jobs:
 
       - name: Wordle Check and test
         run: |
+          rustup component add rust-src --toolchain stable-x86_64-unknown-linux-gnu
           cd wordle
           cargo fmt --all --check
           cargo clippy --all-targets -- -D warnings -A unused-imports
